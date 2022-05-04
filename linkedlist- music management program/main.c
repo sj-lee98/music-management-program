@@ -55,29 +55,32 @@ void process_command(void) {
     while (1) { //infinite loop
         printf("$ ");   //prompt
         
-        if (read_line(stdin, command_line, BUFFER_LENTH) <= 0) {
-            continue;
+        if (read_line(stdin, command_line, BUFFER_LENTH) <= 0) { //read_line : get a user's command line
+            continue; // if user typing just enter key, then continue
         }
+        
+        // find command word
+        // use " " as delimeter
         command = strtok(command_line, " ");
         
         
         
-        if (strcmp(command, "add")==0) {
+        if (strcmp(command, "add") == 0) {
             handle_add();
         }
-        else if (strcmp(command, "search")==0) {
+        else if (strcmp(command, "search") == 0) {
             handle_search();
         }
-        else if (strcmp(command, "remove")==0) {
+        else if (strcmp(command, "remove") == 0) {
             handle_remove();
         }
-        else if (strcmp(command, "status")==0) {
+        else if (strcmp(command, "status") == 0) {
             status();
         }
-        else if (strcmp(command, "play")==0) {
+        else if (strcmp(command, "play") == 0) {
             handle_play();
         }
-        else if (strcmp(command, "save")==0) {
+        else if (strcmp(command, "save") == 0) {
             char *tmp = strtok(NULL, " ");
             if (strcmp(tmp, "as") != 0) {
                 continue;
@@ -91,7 +94,7 @@ void process_command(void) {
     }
 }
 
-void handle_remove() { //remove 6와 같은 index로 삭제함
+void handle_remove() { // delete a song with an index number.
     char *id_str = strtok(NULL, " ");   //song index number
     int index = atoi(id_str);
     remove1(index);
@@ -99,7 +102,7 @@ void handle_remove() { //remove 6와 같은 index로 삭제함
 }
 
 void handle_play() { //노래 번호를 받아 와야함
-    char *id_str = strtok(NULL, " ");   //song index number
+    char *id_str = strtok(NULL, " ");   //need to get a song index number
     int index = atoi(id_str);
     play(index); 
 }
@@ -114,7 +117,7 @@ void handle_search() {
     
     printf("    Title : ");
     int title_lenth = read_line(stdin, title, BUFFER_LENTH);
-    if (title_lenth <= 0) { //가수 이름만 가지고 search
+    if (title_lenth <= 0) { // Search with singer's name.
         search_song1(name);
     }
     else
@@ -126,19 +129,19 @@ void handle_add(void) {
     char *artist = NULL, *title = NULL, *path = NULL;
     
     printf("    Artist : ");
-    //read_line함수는 읽은 문자열의 숫자를 리턴해줌
+    //read_line: Returns the number of read strings
     if (read_line(stdin, buffer, BUFFER_LENTH) > 0) {
         artist = strdup(buffer);
     }
     
     printf("    Title : ");
-    //read_line함수는 읽은 문자열의 숫자를 리턴해줌
+    //read_line: Returns the number of read strings
     if (read_line(stdin, buffer, BUFFER_LENTH) > 0) {
         title = strdup(buffer);
     }
     
     printf("    Path : ");
-    //read_line함수는 읽은 문자열의 숫자를 리턴해줌
+    //read_line: Returns the number of read strings
     if (read_line(stdin, buffer, BUFFER_LENTH) > 0) {
         path = strdup(buffer);
     }

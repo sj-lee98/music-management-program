@@ -11,11 +11,13 @@ int read_line(FILE *fp, char str[], int n) {
     int i = 0, ch = 0;
     
     while ((ch = fgetc(fp)) != '\n' && ch != EOF) {
-        if (i < n -1) {
+        if (i < n-1) {
             str[i++] = ch;
         }
     }
-    str[i] = '\0';
     
-    return i;   //읽은 글자의 갯수 반환
+    // completed read one line or reached end of file
+    str[i] = '\0'; // null char
+    
+    return i;   // returns number of counted char
 }

@@ -9,7 +9,7 @@
 #define string_tools_h
 
 #include <stdio.h>
-
+// declare prototype
 int read_line(FILE *fp, char str[], int n);
 
 #endif /* string_tools_h */

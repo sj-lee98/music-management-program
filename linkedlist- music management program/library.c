@@ -14,8 +14,8 @@
 #define BUFFER_LENTH 200
 #define SIZE_INDEX_TABLE 100
 
-//artist들을 이니셜 별로 구분하여 각 그룹을 하나의 단방향 리스트로 구분함.
-Artist *artist_directory[NUM_CHARS];    //이름의 이니셜의 서로다른 케이스 모두 고려한것 한글, 영어.
+// Separate artists by their initials and organize each group into a one-way linked list
+Artist *artist_directory[NUM_CHARS];    //name can be english or korean
 Snode *index_directory[SIZE_INDEX_TABLE];
 int num_index = 0;
 
@@ -86,7 +86,7 @@ void load(FILE *fp) {
 void search_song2(char *artist, char *title) {
     
     Artist *ptr_artist = find_artist(artist);
-    if (ptr_artist == NULL) { //검색했는데 일치하는 가수가 없는경우.
+    if (ptr_artist == NULL) { // if there's no matching singer
         printf("No such artist exists.\n");
         return;
     }
@@ -107,7 +107,7 @@ void search_song1(char *artist) {
     
     Artist *ptr_artist = find_artist(artist);
     
-    if (ptr_artist == NULL) { //검색했는데 일치하는 가수가 없는경우.
+    if (ptr_artist == NULL) { // if there's no matching singer
         printf("No such artist exists.\n");
         return;
     }
@@ -142,8 +142,8 @@ Artist *create_artist_instance(char *name) {
 
 Artist *add_artist(char *name) {
     
-    Artist *ptr_artist = create_artist_instance(name); //추가할 노드
-    Artist *p = artist_directory[(unsigned char)name[0]]; //first node 즉 head 임
+    Artist *ptr_artist = create_artist_instance(name); //add node
+    Artist *p = artist_directory[(unsigned char)name[0]]; //first node 'head'
     Artist *q = NULL;
     
     while (p != NULL && strcmp(p->name, name) < 0) {
@@ -182,7 +182,7 @@ void add_song(char *artist, char *title, char *path) {
     Artist *ptr_artist =  find_artist(artist);
     
     if (ptr_artist == NULL) {
-        //검색했는데 가수가 없으면
+        //if there's no matching singer
         ptr_artist =  add_artist(artist);
     }
     //add the song to the artist pointed by ptr_artist
